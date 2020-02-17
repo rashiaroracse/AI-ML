@@ -1,0 +1,29 @@
+graph = {
+   1 : [2,3],
+   2: [4,5],
+    3:[6,7],
+    4: [ ],
+    5 : [ ],
+    6 : [ ],
+    7 : [ ]
+}
+print(graph)
+visited = []
+def DFS(visited,graph,n):
+
+   # print("Enter the starting node")
+    #s = int(input())
+   if n not in visited:
+       visited.append(n)
+   for neighbour in graph[n]:
+
+        print("n= ",n)
+        if neighbour not in visited:
+               visited.append(neighbour)
+               print(neighbour)
+               print(visited)
+               DFS(visited,graph,neighbour)
+
+
+DFS(visited,graph,1)
+print(visited)
