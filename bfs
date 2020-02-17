@@ -1,0 +1,41 @@
+graph = {
+  1 : [2,3],
+  2 :[4,5],
+  3:[6],
+  4 : [],
+  5 :[6],
+  6:[]
+}
+
+visited = [] # List to keep track of visited nodes.
+queue = []     #Initialize a queue
+
+def bfs(visited, graph):
+    print("Enter the start node")
+    node = int(input())
+    visited.append(node)
+    queue.append(node)
+    while queue:
+        s = queue.pop(0)
+        print (s, end  = " ")
+        for neighbour in graph[s]:
+          if neighbour not in visited:
+            visited.append(neighbour)
+            queue.append(neighbour)
+
+bfs(visited,graph)
+
+
+"""def bfs(visited,graph,node):
+    if node not in visited:
+        queue.append(node)
+        if queue!=0:
+            value = queue.pop(0)
+            visited.append(value)
+            print(visited)
+            for neighbour in graph[value]:
+                bfs(visited,graph,neighbour)
+
+bfs(visited,graph,1)
+"""
+
