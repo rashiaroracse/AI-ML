@@ -1,0 +1,105 @@
+# Creation of a graph Dynamically from User Input
+graph = {}
+print("Enter the number of Keys or vertices or nodes to be added in the graph")
+NumberofKeys = int(input())
+for i in range(NumberofKeys):
+    print("Enter the values of Keys")
+    keys = int(input())
+    print("Enter the values corresponding to the Keys")
+    values = list(map(int, input().split()))
+    graph[keys] = values
+print(graph)
+
+
+def generate_edges():
+    edges = []
+    for nodes in graph:
+        for neighbour in graph[nodes]:
+            edges.append((nodes, neighbour))
+            print(edges)
+    return edges
+
+
+# add a new vertices or key or node in the graph which is either connected to the graph or is isolated so therefore either I can keep the value part==NULL or put values in it
+def add_a_key_or_node():
+    print("Enter the node you want to add")
+    node1 = int(input())
+    print("Enter the values of this node ")
+    val = list(map(int, input().split()))
+    if node1 not in graph:
+        graph[node1] = val
+        print(graph)
+    else:
+        print("Node already exist")
+
+
+# Del a vertex or a node from the graph so all the edges from this vertices are deleted
+def del_a_key_or_node():
+    print("Enter the value to be deleted from the graph")
+    del1 = int(input())
+    for node1 in graph:
+        for neighbour1 in graph[node1]:
+            if neighbour1 == del1:
+                graph[node1].remove(neighbour1)
+    if del1 in graph:
+        del graph[del1]
+        print(graph)
+    else:
+        print("Invalid number not present in graph")
+
+
+# Display the current graph
+def Display_the_graph():
+    print(graph)
+def add_an_edge():
+    print("Enter the node where an edge should be added")
+    edge1 = int(input())
+    print("Enter the value of edge that need to be added")
+    edgeval = int(input())
+    if edge1 and edgeval in graph:
+        if edgeval not in graph[edge1]:
+            graph[edge1].append(edgeval)
+        print(graph)
+    elif edge1 in graph:
+        if edgeval not in graph[edge1]:
+            graph[edge1].append(edgeval)
+            graph[edgeval] = []
+            print(graph)
+        else:
+            print("val exist")
+
+    else:
+        print("Node does not exist")
+def del_an_edge():
+    print("Enter the node from which  you want to del an edge")
+    deled = int(input())
+    print("Enter the val of edge to be deleted")
+    valed = int(input())
+    for n in graph:
+        for neigh in graph[n]:
+            if deled in graph and valed in graph[deled]:
+                graph[deled].remove(valed)
+                print(graph)
+            else:
+                print("The node from which you want to delete an edge is not present in the graph")
+# Switch case using Dictionary as Python does not have switch function.
+switchdictionary = {
+    1: generate_edges,
+    2: add_a_key_or_node,
+    3: del_a_key_or_node,
+    4:add_an_edge,
+    5: del_an_edge,
+    6: Display_the_graph
+}
+
+Selection = 0
+while (Selection != 8):
+    print("Press 1 : To generate Edges")
+    print("Press 2 : To add a Key or Node")
+    print("Press 3 : To del a Key or Node")
+    print("Press 4 : To add an edge")
+    print("Press 5 : To del and edge")
+    print("Press 6 : To Display the new formed Graph")
+    Selection = int(input("Enter the number"))
+    if (Selection > 0) and (Selection < 8):
+        switchdictionary[Selection]()
