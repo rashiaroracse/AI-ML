@@ -1,0 +1,163 @@
+"Missionary and Cannibal Using BFS"
+print("Enter the number of missionaries")
+missionaries=int(input())
+print("Enter the number of Cannibals")
+cannibals = int(input())
+while missionaries !=cannibals:
+    print("Enter the number of missionaries")
+    missionaries = int(input())
+    print("Enter the number of cannibals")
+    cannibals = int(input())
+start_state = (missionaries,cannibals,0,0,0)
+goal_state= (0,0,1,missionaries,cannibals)
+graph= {}
+visited=[(missionaries,cannibals,0,0,0)]
+path = []
+storeparent={}
+graph[start_state]=[]
+
+
+class missionandcannibal():
+    def valid_state(self,new_state):
+        if(new_state[0]< new_state[1] and new_state[0]>0) or (new_state[3]< new_state[4] and new_state[3]>0):
+            return False
+        else:
+            return True
+
+    def goal(self,new_state):
+        if new_state==goal_state:
+            self.parent(new_state)
+
+    def parent(self,new_state):
+        while new_state!= start_state:
+            path.append(new_state)
+            self.parent(storeparent[new_state])
+        path.append(start_state)
+
+        for n in range(len(path)-1,0,-1):
+            print(path[n])
+        print(path[0])
+        print(graph)
+        exit(0)
+
+
+    def bfs(self,current_state):
+        if current_state[2]==0:
+            "Move 1 missionary and 1 Cannibal to the right"
+            "Step 1: (3,3,0,0,0)-->(2,2,1,1,1)"
+            if (current_state[0]>=1 and current_state[1]>=1):
+                new_state=(current_state[0]-1,current_state[1]-1,1,current_state[3]+1,current_state[4]+1)
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state]=current_state
+                        self.goal(new_state)
+
+
+            "Move 2 Cannibals to the right"
+            if (current_state[1]>=2):
+                new_state=(current_state[0],current_state[1]-2,1,current_state[3],current_state[4]+2)
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+
+            "Move 2 Missionaries to the right"
+            if (current_state[0]>=2):
+                new_state =(current_state[0]-2,current_state[1],1,current_state[3]+2,current_state[4])
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+
+
+        else:
+            "Move 1 Missionary to the left side"
+            if (current_state[3]>=1):
+                new_state = (current_state[0]+1,current_state[1],0,current_state[3]-1,current_state[4])
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+            "Move 1 Cannibal to the right side"
+            if (current_state[4]>=1):
+                new_state=(current_state[0],current_state[1]+1,0,current_state[3],current_state[4]-1)
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+            "Move 1 Missionaries and 1 Cannibal"
+            if(current_state[3]>=1 and current_state[4]>=1):
+                new_state=(current_state[0]+1,current_state[1]+1,0,current_state[3]-1,current_state[4]-1)
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+            "Move 2 Missionaries"
+            if (current_state[3]>=2):
+                new_state = (current_state[0]+2,current_state[1],0,current_state[3]-2,current_state[4])
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+            "Move 2 cannibals"
+            if (current_state[4]>=2):
+                new_state = (current_state[0],current_state[1]+2,0,current_state[3],current_state[4]-2)
+
+                if self.valid_state(new_state):
+                    if not visited.__contains__(new_state):
+                        visited.append(new_state)
+                        graph[current_state].append(new_state)
+                        graph[new_state]=[]
+                        storeparent[new_state] = current_state
+                        self.goal(new_state)
+
+
+        p = visited.index(current_state)
+
+        d = visited[p + 1]
+
+        self.bfs(d)
+
+
+mc = missionandcannibal()
+mc.bfs(start_state)
+
+
+
+
+
+
+
+
+
+
+
