@@ -111,10 +111,9 @@ class missionaryandcannibal():
             return True
 
     def solutionprint(self):
-        for i in visited:
-            print(visited)
-            print(graph)
-            exit(0)
+        print("Visited",visited)
+        print("Graph",graph)
+        exit(0)
 
 mission = missionaryandcannibal()
 mission.dfs(current_state)
