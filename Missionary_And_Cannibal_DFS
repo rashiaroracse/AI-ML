@@ -1,0 +1,120 @@
+"Missionaries and Cannibals Using Depth First Search"
+"Solution Steps => [(3, 3, 0, 1, 1), (2, 2, 1, 1, 1), (3, 2, 0, 0, 1), (3, 0, 1, 0, 3), (3, 1, 0, 0, 2), (1, 1, 1, 2, 2), (2, 2, 0, 1, 1), (0, 2, 1, 3, 1), (0, 3, 0, 3, 0), (0, 1, 1, 3, 2), (1, 1, 0, 2,2), (0, 0, 1, 3, 3)]"
+
+print("Enter the number of missionaries")
+missionaries = int(input())
+print("Enter the number of cannibals")
+cannibals = int(input())
+while missionaries != cannibals:
+    print("Enter the number of missionaries")
+    missionaries = int(input())
+    print("Enter the number of cannibals")
+    cannibals = int(input())
+current_state = (missionaries, cannibals, 0, 0, 0)
+goal_state = (0, 0, 1, missionaries, cannibals)
+graph = {}
+visited = [(missionaries,cannibals,0,1,1)]
+boat = current_state[2]
+
+class missionaryandcannibal():
+    def dfs(self, current_state):
+        if current_state ==  goal_state:
+            self.solutionprint()
+        else:
+            "Check the index of current_state[2] to see were the boat is at and if it is at left perform the operations below"
+            if current_state[2]==0:
+                "STEP 1 : current state = (3,3,0,0,0)"
+                "Move 1 missionary and 1 cannibal to the right"
+                if (current_state[0] >= 1 and current_state[1] >= 1):
+                    "If at left side missionary >= 1 and cannibal >=1""Move them"
+                    new_state = (current_state[0] - 1, current_state[1] - 1, 1, current_state[3] + 1, current_state[4] + 1)
+                    "Check if the new_state is valid or not"
+                    if self.validstate(new_state):
+                        "If yes check if it present in visited or not"
+                        if not visited.__contains__(new_state):
+                            "If not in visited. Then append the new_State in visited.Also add the state in graph "
+                            visited.append(new_state)
+                            graph[current_state] = [(new_state)]
+                            graph[new_state] = []
+                            mc = new_state
+                            "Recursive call of the new_State"
+                            self.dfs(mc)
+                "After Step 1 (3,3,0,0,0)-->(2,2,1,1,1) Hence will go to the else part"
+                "Move 2 Cannibals"
+                "Step 3 : (3,2,0,0,1)-->(3,0,1,0,3)"
+                "Step 9: (0,3,0,3,0)-->(0,1,1,3,2)"
+                "Step 11:(0,2,0,3,1)-->(0,0,1,3,3)"
+                if (current_state[1] >= 2):
+                    new_state = (current_state[0], current_state[1] - 2, 1, current_state[3], current_state[4] + 2)
+                    if self.validstate(new_state):
+                        if not visited.__contains__(new_state):
+                            visited.append(new_state)
+                            graph[current_state]= [(new_state)]
+                            graph[new_state] = []
+                            mc = new_state
+                            self.dfs(mc)
+                "Move 2 missionaries"
+                "Step 5 :(3,1,0,0,2)-->(1,1,1,2,2)"
+                "step 7: (2,2,0,1,1)-->(0,2,1,3,1)"
+                if (current_state[0] >= 2):
+                    new_state = (current_state[0] - 2, current_state[1], 1, current_state[3] + 2, current_state[4])
+                    if self.validstate(new_state):
+                        if not visited.__contains__(new_state):
+                            visited.append(new_state)
+                            graph[current_state]=[(new_state)]
+                            graph[new_state] = []
+                            mc = new_state
+                            self.dfs(mc)
+
+            else:
+                "Step 2 : (2,2,1,1,1) -->(3,2,0,0,1)"
+
+                "Move 1 missionary to the left"
+                if (current_state[3] >= 1):
+                    new_state = (current_state[0] + 1, current_state[1], 0, current_state[3] - 1, current_state[4])
+                    if self.validstate(new_state):
+                        if not visited.__contains__(new_state):
+                            visited.append(new_state)
+                            graph[current_state]=[(new_state)]
+                            graph[new_state] = []
+                            mc = new_state
+                            self.dfs(mc)
+                "Move 1 Cannibal"
+                "Step 4 : (3,0,1,0,3)-->(3,1,0,0,2)"
+                "Step 8:(0,2,1,3,1)-->(0,3,0,3,0)"
+                "Step 10 : (0,1,1,3,2)-->(0,2,0,3,1)"
+                if (current_state[4] >= 1):
+                    new_state = (current_state[0], current_state[1] + 1, 0, current_state[3], current_state[4] - 1)
+                    if self. validstate(new_state):
+                        if not visited.__contains__(new_state):
+                            visited.append(new_state)
+                            graph[current_state]=[(new_state)]
+                            graph[new_state] = []
+                            mc = new_state
+                            self.dfs(mc)
+                "Move 1 Missionary and 1 cannibal"
+                "Step 6: (1,1,1,2,2)-->(2,2,0,1,1)"
+                if (current_state[3] >= 1 and current_state[4] >= 1):
+                    new_state = (
+                    current_state[0] + 1, current_state[1] + 1, 0, current_state[3] - 1, current_state[4] - 1)
+                    if self.validstate(new_state):
+                        if not visited.__contains__(new_state):
+                            visited.append(new_state)
+                            graph[current_state]=[(new_state)]
+                            graph[new_state] = []
+                            mc = new_state
+                            self.dfs(mc)
+    def validstate(self,new_state):
+        if (new_state[0] < new_state[1] and new_state[0] >= 1) or (new_state[3] < new_state[4] and new_state[3] >= 1):
+            return False
+        else:
+            return True
+
+    def solutionprint(self):
+        for i in visited:
+            print(visited)
+            print(graph)
+            exit(0)
+
+mission = missionaryandcannibal()
+mission.dfs(current_state)
