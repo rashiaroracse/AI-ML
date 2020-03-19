@@ -1,0 +1,346 @@
+import sys
+
+#bfs
+#take user input
+initial_puzzle = [1,2,3,4,5,6,7,0,8]
+final_puzzle = [1,2,3,4,5,6,7,8,0]
+# n = int(input("Enter the number of elements in initial puzzle"))
+# for i in range(n):
+#     initial_puzzle.append(int(input()))
+# n1 = int(input("Final puzzle"))
+# for k in range(n1):
+#     final_puzzle.append((int(input()))
+print(initial_puzzle)
+print(final_puzzle)
+visited = [initial_puzzle]
+print("v",visited)
+graph = {}
+parents = {}
+path = []
+class eightpuzzle:
+    def states(self,first_puzzle):
+        self.checkgoal(first_puzzle, final_puzzle)
+        # as the input is coming as tuple and we need to make changes by swaping we need to convert it to list4
+        converttuple = list(first_puzzle)
+        if first_puzzle[0]==0:
+
+            graph[tuple(first_puzzle)] = []
+            print(graph)
+            #index 0 swapped with index 1
+            converttuple[0],converttuple[1] =converttuple[1],converttuple[0]
+            temp =converttuple[1],converttuple[0]
+            print(converttuple)
+            if not visited.__contains__(converttuple):
+                graph[tuple(first_puzzle)].append(converttuple)
+                visited.append(converttuple)
+                parents[tuple(converttuple)] = first_puzzle
+                print(parents)
+                self.checkgoal(converttuple,final_puzzle)
+
+
+            #index 0 swapped with index 3
+            converttuple=list(first_puzzle)
+            converttuple[0],converttuple[3]=converttuple[3],converttuple[0]
+            print(converttuple)
+
+            if not visited.__contains__(converttuple):
+                graph[tuple(first_puzzle)].append(converttuple)
+                visited.append(converttuple)
+                parents[tuple(converttuple)]=first_puzzle
+                print(parents)
+                self.checkgoal(converttuple,final_puzzle)
+                #blank at place 1
+
+        if first_puzzle[1] ==0:
+            graph[tuple(first_puzzle)] =[]
+            print(graph)
+            #swap 1index and 0 index
+            converttuple[1],converttuple[0] =converttuple[0],converttuple[1]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                print(visited)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print(graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print(parents)
+                self.checkgoal(converttuple,final_puzzle)
+
+            converttuple=list(first_puzzle)
+            #swap index 1 and index 2
+            converttuple[1],converttuple[2] = converttuple[2],converttuple[1]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print(graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents",parents)
+                self.checkgoal(converttuple,final_puzzle)
+
+
+            converttuple = list(first_puzzle)
+            #swap index 1 and 4
+            converttuple[1], converttuple[4] = converttuple[4], converttuple[1]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph",graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+        if first_puzzle[2] == 0:
+            #index 2 swapped with index 1
+            graph[tuple(first_puzzle)] = []
+            converttuple[2],converttuple[1] =converttuple[1],converttuple[2]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph",graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+
+            #index 2 swapped with index 5
+            converttuple = list(first_puzzle)
+            converttuple[2], converttuple[5] = converttuple[5], converttuple[2]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                print("graph", graph)
+                print("t",first_puzzle)
+                graph[tuple(first_puzzle)].append(converttuple)
+
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+
+        if first_puzzle[3]==0:
+            graph[tuple(first_puzzle)] = []
+            #swap index 3 with 0
+            converttuple[3], converttuple[0] = converttuple[0], converttuple[3]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            converttuple = list(first_puzzle)
+            #swap 3 with 4
+            converttuple[3], converttuple[4] = converttuple[4], converttuple[3]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+            converttuple = list(first_puzzle)
+            # swap 3 with 6
+            converttuple[3], converttuple[6] = converttuple[6], converttuple[3]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+        if first_puzzle[4]==0:
+            graph[tuple(first_puzzle)] = []
+            #swap 4 with 1
+            converttuple[4], converttuple[1] = converttuple[1], converttuple[4]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            converttuple = list(first_puzzle)
+            # swap 4 with 7
+            converttuple[4], converttuple[7] = converttuple[7], converttuple[4]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            converttuple = list(first_puzzle)
+            # swap 4 with index 3
+            converttuple[4], converttuple[3] = converttuple[3], converttuple[4]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+            converttuple = list(first_puzzle)
+            # swap 4 with index 5
+            converttuple[4], converttuple[5] = converttuple[5], converttuple[4]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+        if first_puzzle[5]==0:
+            graph[tuple(first_puzzle)] = []
+            #swap 5 with 2
+            converttuple[5], converttuple[2] = converttuple[2], converttuple[5]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            converttuple = list(first_puzzle)
+            # swap 5 with index 8
+            converttuple[5], converttuple[8] = converttuple[8], converttuple[5]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            converttuple = list(first_puzzle)
+            # swap 5 with index 4
+            converttuple[5], converttuple[4] = converttuple[4], converttuple[5]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+        if first_puzzle[6]==0:
+            graph[tuple(first_puzzle)] = []
+
+            # swap 6 with index 3
+            converttuple[6], converttuple[3] = converttuple[3], converttuple[6]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            converttuple = list(first_puzzle)
+             # swap 6 with index 7
+            converttuple[6], converttuple[7] = converttuple[7], converttuple[6]
+            if not visited.__contains__(converttuple):
+                    visited.append(converttuple)
+                    graph[tuple(first_puzzle)].append(converttuple)
+                    print("graph", graph)
+                    parents[tuple(converttuple)] = first_puzzle
+                    print("Parents", parents)
+                    self.checkgoal(converttuple, final_puzzle)
+
+        if first_puzzle[7]==0:
+            graph[tuple(first_puzzle)] = []
+            # swap 7 wirh 6
+            converttuple[7], converttuple[6] = converttuple[6], converttuple[7]
+            print(converttuple)
+            if not visited.__contains__(converttuple):
+                    visited.append(converttuple)
+                    graph[tuple(first_puzzle)].append(converttuple)
+                    print("graph", graph)
+                    parents[tuple(converttuple)] = first_puzzle
+                    print("Parents", parents)
+                    self.checkgoal(converttuple, final_puzzle)
+
+            #swap 7 with 4
+            converttuple = list(first_puzzle)
+            converttuple[7], converttuple[4] = converttuple[4], converttuple[7]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+            #swap 7 with 8
+            converttuple = list(first_puzzle)
+            converttuple[7], converttuple[8] = converttuple[8], converttuple[7]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+        if first_puzzle[8]==0:
+            graph[tuple(first_puzzle)] = []
+            #swap 8 with 5
+            converttuple[8], converttuple[5] = converttuple[5], converttuple[8]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+
+            #swap 8 with 7
+            converttuple[8], converttuple[7] = converttuple[7], converttuple[8]
+            if not visited.__contains__(converttuple):
+                visited.append(converttuple)
+                graph[tuple(first_puzzle)].append(converttuple)
+                print("graph", graph)
+                parents[tuple(converttuple)] = first_puzzle
+                print("Parents", parents)
+                self.checkgoal(converttuple, final_puzzle)
+
+        print("dgd",visited)
+        print("gra",graph)
+
+        i = visited.index(first_puzzle)
+        k = visited[i+1]
+        self.states(k)
+
+
+    def checkgoal(self,converttuple1,final_puzzle1):
+        if converttuple1== final_puzzle1:
+            #because humne graph mein keys tuple ke form mein
+            print("weiuge")
+            p = tuple(final_puzzle)
+            self.parents(p)
+    def parents(self,c):
+        while c != tuple(initial_puzzle):
+            path.append(c)
+            self.parents(tuple(parents[c]))
+        path.append(c)
+
+        for n1 in range(len(path)-1,-1,-1):
+            print("goal found")
+            print("path",path[n1])
+        exit(0)
+
+eight = eightpuzzle()
+eight.states(initial_puzzle)
+sys.setrecursionlimit(5000)
