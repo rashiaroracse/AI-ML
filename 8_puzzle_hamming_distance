@@ -1,0 +1,259 @@
+initial_puzzle = [1,2,3,4,5,6,7,0,8]
+#one dimensional list 9 elements  indexed from 0-8 representing theb position of the the block.
+#0 represents the blank space
+final_puzzle = [1,2,3,4,5,6,7,8,0]#goal state
+#visited contains the node that have been visited.
+visited = [tuple(initial_puzzle)]
+#contain the path that has to be printed
+graph = {}
+parents = {}
+path = []
+#to calculate the hamming distance
+distance = {}
+
+class hamming :
+    #different condition or states that the bot can choose at every position
+    def states(self,first_puzzle):
+        #convert the tuple into list to make mov ein right,left,up,down direction
+        list1 = list(first_puzzle)
+        #if the blank is at 0 position
+        if first_puzzle[0] == 0:
+            graph[first_puzzle] = []
+            #move right  0,1 --1,0
+            list1[0],list1[1] = list1[1],list1[0]
+            if not visited.__contains__(list1):
+                #find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] =hdistance
+
+
+            list1 = list(first_puzzle)
+            #move down
+            list1[0],list1[3] =list1[3],list1[0]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance=self.hamdistance(list1)
+
+                distance[tuple(list1)]=hdistance
+
+        #if the blank is at 1 position
+        if first_puzzle[1]==0:
+            graph[first_puzzle] = []
+            #move left
+            list1[1], list1[0] = list1[0], list1[1]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move right
+            list1[1], list1[2] = list1[2], list1[1]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move down
+            list1[1], list1[4] = list1[4], list1[1]
+            if not visited.__contains__(list1):
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+        #if the blank is at 3rd position
+        if first_puzzle[2]==0:
+            graph[first_puzzle] = []
+            #move left
+            list1[2], list1[1] = list1[1], list1[2]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move down
+            list1[2], list1[5] = list1[5], list1[2]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+        # if black is at 3th position
+        if first_puzzle[3]==0:
+            graph[first_puzzle] = []
+            #move up
+            list1[3], list1[0] = list1[0], list1[3]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move right
+            list1[3], list1[4] = list1[4], list1[3]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move down
+            list1[3], list1[6] = list1[6], list1[3]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+        #if black is at 4th place
+        if first_puzzle[4]==0:
+            graph[first_puzzle] = []
+            list1[4], list1[1] = list1[1], list1[4]
+            if not visited.__contains__(list1):
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move left
+            list1[4], list1[3] = list1[3], list1[4]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move right
+            list1[4], list1[5] = list1[5], list1[4]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move down
+            list1[4], list1[7] = list1[7], list1[4]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            #if blank is at 5th position
+        if first_puzzle[5]==0:
+            graph[first_puzzle] = []
+            #move up
+            list1[5], list1[2] = list1[2], list1[5]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move left
+            list1[5], list1[4] = list1[4], list1[5]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move down
+            list1[5], list1[8] = list1[8], list1[5]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            #if blank is at 6th position
+        if first_puzzle[6]==0:
+            graph[first_puzzle] = []
+           #move up
+            list1[6], list1[3] = list1[3], list1[6]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move right
+            list1[6], list1[7] = list1[7], list1[6]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+        #if blank is at 7th position
+        if first_puzzle[7]==0:
+            graph[first_puzzle] = []
+        #MOVE UP
+            list1[7], list1[4] = list1[4], list1[7]
+            # find the hamming distance of this  changes node with respect to the final or goal state
+            if not visited.__contains__(list1):
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move left
+            list1[7], list1[6] = list1[6], list1[7]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move right
+            list1[7], list1[8] = list1[8], list1[7]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+            #if blank is at 8th position
+        if first_puzzle[8]==0:
+            #move up
+            graph[first_puzzle] = []
+            list1[8], list1[5] = list1[5], list1[8]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+            list1 = list(first_puzzle)
+            #move left
+            list1[8], list1[7] = list1[7], list1[8]
+            if not visited.__contains__(list1):
+                # find the hamming distance of this  changes node with respect to the final or goal state
+                hdistance = self.hamdistance(list1)
+                distance[tuple(list1)] = hdistance
+
+
+        v =min(distance.values())
+        for key,value in distance.items():
+            if v == value:
+                list1 =key
+                break
+        graph[first_puzzle].append(list1)
+        visited.append(tuple(first_puzzle))
+        distance.clear()
+        self.check_goals(list1,final_puzzle)
+        self.states(list1)
+
+    def check_goals(self, p1, p2):
+        if p1 == tuple(p2):
+            print("Goal")
+            for j in visited:
+                print(j)
+            exit(0)
+
+    def hamdistance(self,list1):
+        hdistance =0
+        for i in range(9):
+            #if the current list position[i] matches with the goal position then dont count else hamming distance +1
+            if not list1[i] ==final_puzzle[i]:
+                hdistance +=1
+        return hdistance
+
+
+
+
+
+
+
+ham = hamming()
+ham.states(tuple(initial_puzzle))
